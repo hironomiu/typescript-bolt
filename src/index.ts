@@ -14,7 +14,7 @@ app.message('yoyo', async ({ message, say }: any) => {
 })
 
 // TODO: 型
-app.message('choice', async ({ message, say }: any) => {
+app.message('choice', async ({ message, say }: { message: any; say: any }) => {
   const col: string[] = message.text.split(' ')
   if (col.length > 1) {
     const position: number = Math.floor(Math.random() * (col.length - 1)) + 1
