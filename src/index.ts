@@ -8,10 +8,12 @@ const app = new App({
   signingSecret: process.env.SLACK_BOT_SIGNING_SECRET,
 })
 
+// TODO: 型
 app.message('yoyo', async ({ message, say }: any) => {
   await say(`Hey there <@${message.user}>!`)
 })
 
+// TODO: 型
 app.message('choice', async ({ message, say }: any) => {
   const col: string[] = message.text.split(' ')
   if (col.length > 1) {
@@ -22,6 +24,25 @@ app.message('choice', async ({ message, say }: any) => {
       `choice の後ろに選択したい項目を半角スペース区切りで記載しましょう`
     )
   }
+})
+// TODO: 型
+app.command('/omikuji', async ({ ack, respond }: any) => {
+  await ack()
+  const results = ['大吉', '中吉', '小吉', '吉', '凶', '大凶']
+  await respond({
+    respond_type: 'in_channel',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `:shallow_pan_of_food:${
+            results[Math.floor(Math.random() * results.length)]
+          }`,
+        },
+      },
+    ],
+  })
 })
 ;(async () => {
   await app
