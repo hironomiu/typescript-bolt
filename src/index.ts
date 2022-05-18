@@ -9,8 +9,19 @@ const app = new App({
 })
 
 app.message('yoyo', async ({ message, say }: any) => {
-  console.log('called')
   await say(`Hey there <@${message.user}>!`)
+})
+
+app.message('choice', async ({ message, say }: any) => {
+  const col: string[] = message.text.split(' ')
+  if (col.length > 1) {
+    const position: number = Math.floor(Math.random() * (col.length - 1)) + 1
+    await say(`${col[position]}`)
+  } else {
+    await say(
+      `choice の後ろに選択したい項目を半角スペース区切りで記載しましょう`
+    )
+  }
 })
 ;(async () => {
   await app
