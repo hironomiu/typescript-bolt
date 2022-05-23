@@ -29,6 +29,7 @@ app.message('choice', async ({ message, say }: { message: any; say: any }) => {
 app.command('/omikuji', async ({ ack, respond }: any) => {
   await ack()
   const results = ['大吉', '中吉', '小吉', '吉', '凶', '大凶']
+  // await respond(results[Math.floor(Math.random() * results.length)])
   await respond({
     respond_type: 'in_channel',
     blocks: [
@@ -43,6 +44,9 @@ app.command('/omikuji', async ({ ack, respond }: any) => {
       },
     ],
   })
+})
+app.command('/say', async ({ ack, respond }: any) => {
+  respond('say hooo!')
 })
 ;(async () => {
   await app
